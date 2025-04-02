@@ -1,0 +1,83 @@
+/* Container principal do formulário */
+form {
+  width: 100%;
+  max-width: 600px; /* Tamanho máximo para dispositivos maiores */
+  margin-left: 20px; /* Alinhando à esquerda */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos de cada seção */
+h2 .title{
+  text-align: left;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Estilo para os grupos de inputs */
+div[formGroupName] {
+  margin-bottom: 20px;
+}
+
+/* Estilo para labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Estilo para os campos de entrada */
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Adicionando cor de fundo quando o campo é tocado e válido */
+input.ng-touched.ng-valid {
+  background-color: #e0f7fa;  /* Cor clara para indicar que o campo é válido */
+}
+
+/* Adicionando cor de fundo quando o campo está inválido */
+input.ng-touched.ng-invalid {
+  background-color: #ffebee;  /* Cor de erro quando o campo está inválido */
+}
+
+/* Estilo para mensagens de erro */
+div {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+
+/* Responsividade para telas pequenas */
+@media (max-width: 600px) {
+  form {
+    max-width: 100%;  /* O formulário ocupa toda a largura disponível */
+    margin-left: 10px;  /* Ajuste da margem à esquerda */
+  }
+
+  /* Ajustando o tamanho do título em telas pequenas */
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  /* Ajustando os campos de entrada e botões */
+  input {
+    padding: 10px;  /* Reduzindo o padding para telas menores */
+  }
+  button {
+    padding: 10px;  /* Ajustando o botão também */
+  }
+
+}
