@@ -1,4 +1,5 @@
-export interface usuarioResquest {
+export interface userResponse {
+  id: number;
   informacoesPessoais: {
     nome: string;
     idade: number;
@@ -6,7 +7,8 @@ export interface usuarioResquest {
     email: string;
   };
   endereco: {
-    numero: string; // ou number, dependendo de como você deseja tratar
+    endereco: string
+    numero: string;
     bairro: string;
     cidade: string;
   };

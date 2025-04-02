@@ -1,16 +1,22 @@
-/* Container principal do formulário */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f4f4f4;
+}
+
 form {
   width: 100%;
-  max-width: 600px; /* Tamanho máximo para dispositivos maiores */
-  margin-left: 20px; /* Alinhando à esquerda */
+  max-width: 600px;
+  margin-left: 20px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Títulos de cada seção */
-h2 .title{
+h2 .title {
   text-align: left;
   font-size: 1.5rem;
   color: #333;
@@ -18,20 +24,19 @@ h2 .title{
   font-weight: bold;
 }
 
-/* Estilo para os grupos de inputs */
 div[formGroupName] {
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
-/* Estilo para labels */
 label {
   display: block;
   font-weight: bold;
   margin-bottom: 8px;
-  color: #555;
+  color: #00796b;
 }
 
-/* Estilo para os campos de entrada */
 input {
   width: 100%;
   padding: 12px;
@@ -42,42 +47,76 @@ input {
   box-sizing: border-box;
 }
 
-/* Adicionando cor de fundo quando o campo é tocado e válido */
+@media (max-width: 768px) {
+  div[formGroupName] {
+    grid-template-columns: 1fr;
+  }
+}
+
 input.ng-touched.ng-valid {
-  background-color: #e0f7fa;  /* Cor clara para indicar que o campo é válido */
+  background-color: #e0f7fa;
 }
 
-/* Adicionando cor de fundo quando o campo está inválido */
 input.ng-touched.ng-invalid {
-  background-color: #ffebee;  /* Cor de erro quando o campo está inválido */
+  background-color: #ffebee;
 }
 
-/* Estilo para mensagens de erro */
-div {
+div[formGroupName] .error-message {
   color: #d32f2f;
   font-size: 0.875rem;
-  margin-top: 5px;
+  white-space: nowrap;
 }
 
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
 
-/* Responsividade para telas pequenas */
+  .data-container {
+    order: 0;
+  }
+
+  .error-message {
+    display: block;
+  }
+}
+
+.bnt {
+  margin-top: 15px;
+}
+
+.list-container {
+  background-color: #00796b;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  margin-right: 34.5%;
+  margin-left: 34.5%;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list li {
+  font-weight: bold;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
 @media (max-width: 600px) {
-  form {
-    max-width: 100%;  /* O formulário ocupa toda a largura disponível */
-    margin-left: 10px;  /* Ajuste da margem à esquerda */
+  .list-container {
+    width: 80%;
+    max-width: 100%;
+    padding: 15px;
   }
 
-  /* Ajustando o tamanho do título em telas pequenas */
-  h2 {
-    font-size: 1.2rem;
+  .list li {
+    font-size: 14px;
+    padding: 8px;
   }
-
-  /* Ajustando os campos de entrada e botões */
-  input {
-    padding: 10px;  /* Reduzindo o padding para telas menores */
-  }
-  button {
-    padding: 10px;  /* Ajustando o botão também */
-  }
-
 }

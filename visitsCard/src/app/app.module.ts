@@ -8,6 +8,8 @@ import { HeaderComponent } from 'src/components/header/header.component';
 import { FooterComponent } from 'src/components/footer/footer.component';
 import { FormCardComponent } from 'src/formCard/formCard.component';
 import { ButtonComponent } from 'src/components/button/button.component';
+import { UserCardService } from 'src/service/userCard.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,8 +25,11 @@ import { ButtonComponent } from 'src/components/button/button.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
 ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [UserCardService],
+  bootstrap: [AppComponent],
+
+
 })
 export class AppModule { }

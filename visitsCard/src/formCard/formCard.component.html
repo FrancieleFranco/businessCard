@@ -1,49 +1,141 @@
-<form [formGroup]="formCard" (ngSubmit)="onSubmit()">
-  <div formGroupName="informacoesPessoais">
-    <label for="nome">Nome</label>
-    <input id="nome" formControlName="nome">
-    <div *ngIf="formCard.get('informacoesPessoais.nome')?.invalid && formCard.get('informacoesPessoais.nome')?.touched">
-      Nome é obrigatório.
-    </div>
+<div class="container">
+  <div class="form-container">
+    <form [formGroup]="formCard" (ngSubmit)="createUser()">
+      <div formGroupName="informacoesPessoais">
+        <div class="form-personal-Information">
+          <label for="nome">Nome</label>
+          <input id="nome" formControlName="nome" />
+          <div
+            class="error-message"
+            *ngIf="
+              formCard.get('informacoesPessoais.nome')?.invalid &&
+              formCard.get('informacoesPessoais.nome')?.touched
+            "
+          >
+            Nome é obrigatório.
+          </div>
+        </div>
 
-    <label for="idade">Idade</label>
-    <input id="idade" formControlName="idade">
-    <div *ngIf="formCard.get('informacoesPessoais.idade')?.invalid && formCard.get('informacoesPessoais.idade')?.touched">
-      Idade é obrigatória e deve ser um número.
-    </div>
+        <div class="form-personal-Information">
+          <label for="idade">Idade</label>
+          <input id="idade" formControlName="idade" />
+          <div
+            class="error-message"
+            *ngIf="
+              formCard.get('informacoesPessoais.idade')?.invalid &&
+              formCard.get('informacoesPessoais.idade')?.touched
+            "
+          >
+            Idade é obrigatória e deve ser um número.
+          </div>
+        </div>
 
-    <label for="telefone">Telefone</label>
-    <input id="telefone" formControlName="telefone">
-    <div *ngIf="formCard.get('informacoesPessoais.telefone')?.invalid && formCard.get('informacoesPessoais.telefone')?.touched">
-      Telefone é obrigatório.
-    </div>
+        <div class="form-personal-Information">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" formControlName="telefone" />
+          <div
+            class="error-message"
+            *ngIf="
+              formCard.get('informacoesPessoais.telefone')?.invalid &&
+              formCard.get('informacoesPessoais.telefone')?.touched
+            "
+          >
+            Telefone é obrigatório.
+          </div>
+        </div>
+        <div class="form-personal-Information">
+          <label for="email">E-mail</label>
+          <input id="email" formControlName="email" />
+          <div
+            class="error-message"
+            *ngIf="
+              formCard.get('informacoesPessoais.email')?.invalid &&
+              formCard.get('informacoesPessoais.email')?.touched
+            "
+          >
+            E-mail é obrigatório e deve ser válido.
+          </div>
+        </div>
+      </div>
 
-    <label for="email">E-mail</label>
-    <input id="email" formControlName="email">
-    <div *ngIf="formCard.get('informacoesPessoais.email')?.invalid && formCard.get('informacoesPessoais.email')?.touched">
-      E-mail é obrigatório e deve ser válido.
-    </div>
+      <div formGroupName="endereco">
+        <div class="form-address">
+          <label for="endereco">Endereço</label>
+          <input id="endereco" formControlName="endereco" />
+          <div
+            class="error-message"
+            class="error-message"
+            *ngIf="
+              formCard.get('endereco.endereco')?.invalid &&
+              formCard.get('endereco.endereco')?.touched
+            "
+          >
+            Endereço é obrigatório.
+          </div>
+        </div>
+
+        <div class="form-address">
+          <label for="numero">Número</label>
+          <input id="numero" formControlName="numero" />
+          <div
+            class="error-message"
+            *ngIf="
+              formCard.get('endereco.numero')?.invalid &&
+              formCard.get('endereco.numero')?.touched
+            "
+          >
+            Número é obrigatório.
+          </div>
+        </div>
+
+        <div class="form-address">
+          <label for="bairro">Bairro</label>
+          <input id="bairro" formControlName="bairro" />
+          <div
+            class="error-message"
+            *ngIf="
+              formCard.get('endereco.bairro')?.invalid &&
+              formCard.get('endereco.bairro')?.touched
+            "
+          >
+            Bairro é obrigatório.
+          </div>
+        </div>
+        <div class="form-address">
+          <label for="cidade">Cidade</label>
+          <input id="cidade" formControlName="cidade" />
+          <div
+            class="error-message"
+            *ngIf="
+              formCard.get('endereco.cidade')?.invalid &&
+              formCard.get('endereco.cidade')?.touched
+            "
+          >
+            Cidade é obrigatória.
+          </div>
+        </div>
+      </div>
+      <div class="bnt">
+        <app-button
+          type="submit"
+          [disabled]="formCard.invalid"
+          [labelButton]="'Enviar'"
+        ></app-button>
+      </div>
+    </form>
   </div>
-
-  <div formGroupName="endereco">
-    <label for="numero">Número</label>
-    <input id="numero" formControlName="numero">
-    <div *ngIf="formCard.get('endereco.numero')?.invalid && formCard.get('endereco.numero')?.touched">
-      Número é obrigatório.
-    </div>
-
-    <label for="bairro">Bairro</label>
-    <input id="bairro" formControlName="bairro">
-    <div *ngIf="formCard.get('endereco.bairro')?.invalid && formCard.get('endereco.bairro')?.touched">
-      Bairro é obrigatório.
-    </div>
-
-    <label for="cidade">Cidade</label>
-    <input id="cidade" formControlName="cidade">
-    <div *ngIf="formCard.get('endereco.cidade')?.invalid && formCard.get('endereco.cidade')?.touched">
-      Cidade é obrigatória.
-    </div>
+  <div class="list-container">
+    <ul *ngFor="let usuario of users" class="list">
+      <li><strong>Nome:</strong> {{ usuario.informacoesPessoais.nome }}</li>
+      <li><strong>Idade: </strong> {{ usuario.informacoesPessoais.idade }}</li>
+      <li>
+        <strong>Telefone: </strong>{{ usuario.informacoesPessoais.telefone }}
+      </li>
+      <li><strong>E-mail: </strong> {{ usuario.informacoesPessoais.email }}</li>
+      <li><strong>Endereço: </strong>{{ usuario.endereco.endereco }}</li>
+      <li><strong>Número: </strong>{{ usuario.endereco.numero }}</li>
+      <li><strong>Bairro: </strong> {{ usuario.endereco.bairro }}</li>
+      <li><strong>Cidade: </strong> {{ usuario.endereco.cidade }}</li>
+    </ul>
   </div>
-<app-button type="submit" [disabled]="formCard.invalid" [labelButton]="'Enviar'"></app-button>
-
-</form>
+</div>

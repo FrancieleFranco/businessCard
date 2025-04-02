@@ -1,78 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { usuarioResquest } from '../model/cardRequest.interface';
-
+import { userResquest } from '../model/userRequest.interface';
+import { UserCardService } from 'src/service/userCard.service';
+import { userResponse } from 'src/model/userResponse.interface';
 
 @Component({
   selector: 'app-formCard',
   templateUrl: './formCard.component.html',
-  styleUrls: ['./formCard.component.css']
+  styleUrls: ['./formCard.component.css'],
 })
-export class FormCardComponent  implements OnInit {
-
-  /*user!: usuarioResquest;*/
+export class FormCardComponent implements OnInit {
   formCard: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  users: userResponse[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private userCardService: UserCardService
+  ) {
     this.formCard = this.fb.group({
       informacoesPessoais: this.fb.group({
-        nome: ['', [Validators.required]],  // Nome obrigatório
-        idade: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],  // Idade obrigatória e numérica
-        telefone: ['', [Validators.required]],  // Telefone obrigatório
-        email: ['', [Validators.required, Validators.email]]  // E-mail obrigatório
+        nome: ['', [Validators.required]],
+        idade: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        telefone: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
       }),
       endereco: this.fb.group({
-        numero: ['', [Validators.required]],  // Número obrigatório
-        bairro: ['', [Validators.required]],  // Bairro obrigatório
-        cidade: ['', [Validators.required]]  // Cidade obrigatória
-      })
+        endereco: ['', [Validators.required]],
+        numero: ['', [Validators.required]],
+        bairro: ['', [Validators.required]],
+        cidade: ['', [Validators.required]],
+      }),
     });
   }
- /*formCard = this.fb.group({
-    // Seção 1: Dados Pessoais
-    dadosPessoais: this.fb.group({
-      nome: ['', Validators.required],
-      idade: ['', [Validators.required, Validators.min(18)]],
-      telefone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
-    }),
-    // Seção 2: Endereço
-    endereco: this.fb.group({
-      endereco: ['', Validators.required],
-      numero: ['', Validators.required],
-      bairro: ['', Validators.required],
-      cidade: ['', Validators.required]
-    })
-  });
--*/
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
+  carregarUsuarios(): void {
+    this.userCardService.getUser().subscribe((data: userResponse[]) => {
+      this.users = data;
+    });
   }
-  onSubmit() {
+
+  createUser(): void {
     if (this.formCard.valid) {
-      const formValue = this.formCard.value;
-
-      // Criando o objeto de requisição com os dados do formulário
-      const usuario: usuarioResquest = {
-        informacoesPessoais: {
-          nome: formValue.informacoesPessoais.nome,
-          idade: +formValue.informacoesPessoais.idade,  // Convertendo para número
-          telefone: formValue.informacoesPessoais.telefone,
-          email: formValue.informacoesPessoais.email
-        },
-        endereco: {
-          numero: formValue.endereco.numero,
-          bairro: formValue.endereco.bairro,
-          cidade: formValue.endereco.cidade
-        }
-      };
-
-      console.log(usuario);  // Aqui você pode usar a variável `usuario` para enviar à API
-    } else {
-      console.log('Formulário inválido');
+      const novoUsuario: userResponse = this.formCard.value;
+      this.userCardService
+        .createUser(novoUsuario)
+        .subscribe((usuarioCriado: userResponse) => {
+          this.users.push(usuarioCriado);
+          this.formCard.reset();
+        });
+      console.log(novoUsuario);
     }
   }
 }
-
-
