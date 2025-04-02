@@ -3,14 +3,14 @@
 
 Este é um projeto de um Cartão de Visitas desenvolvido em **Angular 16**, utilizando **JSON Server** para simular uma API REST.
 
-![Logo do projeto](../businessCard/visitsCard/src/assets/visits.jpg)
+![Logo do projeto](visitsCard/src/assets/visits.jpg)
 
 ## 📌 Funcionalidades
 - Cadastro de usuários com informações pessoais e endereço.
 - Listagem de usuários.
 
 
-[Demonstração](../businessCard/visitsCard/src/assets/visits1.mp4)
+[Demonstração](visitsCard/src/assets/visits1.gif)
 
 
 ## 🛠️ Tecnologias Utilizadas
